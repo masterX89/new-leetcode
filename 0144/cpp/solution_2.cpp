@@ -33,13 +33,11 @@ class Solution {
         stack<TreeNode *> st;
         TreeNode *node = root;
         while (node != nullptr || !st.empty()) {
-            // left
             while (node != nullptr) {
                 res.push_back(node->val);
                 st.push(node);
                 node = node->left;
             }
-            // right
             node = st.top();
             st.pop();
             node = node->right;
