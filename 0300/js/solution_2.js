@@ -4,7 +4,7 @@
  * @return {number}
  */
 var lengthOfLIS = function (nums) {
-  if (!nums.length) return []
+  if (!nums.length) return 0
 
   let n = nums.length
   let d = new Array(n + 1).fill(0)
