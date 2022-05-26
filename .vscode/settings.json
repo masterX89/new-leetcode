@@ -16,5 +16,10 @@
   "code-runner.executorMap": {
     "cpp": "mkdir build && cd $dir && g++ -std=c++11 $fileName -o ./build/$fileNameWithoutExt && ./build/$fileNameWithoutExt"
   },
-  "cSpell.words": ["cpdomains", "nullptr", "nums"]
+  "cSpell.words": [
+    "cpdomains",
+    "nullptr",
+    "nums",
+    "Subarrays"
+  ]
 }
