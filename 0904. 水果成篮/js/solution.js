@@ -10,11 +10,7 @@ var totalFruit = function (fruits) {
   while (r < fruits.length) {
     const c = fruits[r]
     r++
-    if (window.has(c)) {
-      window.set(c, window.get(c) + 1)
-    } else {
-      window.set(c, 1)
-    }
+    window.set(c, (window.get(c) || 0) + 1)
     while (window.size > 2) {
       const d = fruits[l]
       l++
