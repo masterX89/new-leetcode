@@ -45,3 +45,15 @@ var majorityElement = function (nums) {
   }
   return recurse(0, nums.length - 1)
 }
+
+// Moore Vote
+var majorityElement = function (nums) {
+  let res = null
+  let count = 0
+  for (const num of nums) {
+    if (count === 0) res = num
+    if (num === res) count++
+    else count--
+  }
+  return res
+}
