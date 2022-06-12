@@ -26,6 +26,15 @@ var removeElement = function (nums, val) {
   return slow
 }
 
+// 快慢指针 省略 fast 的写法
+var removeElement = function (nums, val) {
+  let slow = 0
+  for (const num of nums) {
+    if (num !== val) nums[slow++] = num
+  }
+  return slow
+}
+
 // 相向指针
 var removeElement = function (nums, val) {
   let [l, r] = [0, nums.length - 1]
