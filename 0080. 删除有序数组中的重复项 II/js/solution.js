@@ -4,13 +4,11 @@
  */
 var removeDuplicates = function (nums) {
   const process = (nums, k) => {
-    let index = 0
-    for (let num of nums) {
-      if (index < k || nums[index - k] !== num) {
-        nums[index++] = num
-      }
+    let slow = 0
+    for (let fast = 0; fast < nums.length; fast++) {
+      if (slow < k || nums[fast] !== nums[slow - k]) nums[slow++] = nums[fast]
     }
-    return index
+    return slow
   }
   return process(nums, 2)
 }
