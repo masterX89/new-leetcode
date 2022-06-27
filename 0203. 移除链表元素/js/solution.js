@@ -24,3 +24,18 @@ var removeElements = function (head, val) {
   }
   return head
 }
+
+var removeElements = function (head, val) {
+  while (head && head.val === val) head = head.next
+  if (!head) return head
+  let [slow, fast] = [head, head.next]
+  while (fast) {
+    if (fast.val !== val) {
+      slow.next = fast
+      slow = slow.next
+    }
+    fast = fast.next
+  }
+  slow.next = null
+  return head
+}
