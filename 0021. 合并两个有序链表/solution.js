@@ -13,7 +13,7 @@
 var mergeTwoLists = function (list1, list2) {
   let p1 = list1
   let p2 = list2
-  let p = (head = new ListNode())
+  let p = (dummy = new ListNode())
   while (p1 && p2) {
     if (p1.val < p2.val) {
       p.next = p1
@@ -26,5 +26,5 @@ var mergeTwoLists = function (list1, list2) {
   }
   if (p1) p.next = p1
   if (p2) p.next = p2
-  return head.next
+  return dummy.next
 }
