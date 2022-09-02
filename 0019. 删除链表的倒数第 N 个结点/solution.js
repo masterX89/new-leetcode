@@ -15,15 +15,15 @@ var removeNthFromEnd = function (head, n) {
   dummy.next = head
 
   const findFromEnd = (head, n) => {
-    let p2 = (p1 = head)
+    let slow = (fast = head)
     for (let i = 0; i < n; i++) {
-      p1 = p1.next
+      fast = fast.next
     }
-    while (p1) {
-      p1 = p1.next
-      p2 = p2.next
+    while (fast) {
+      fast = fast.next
+      slow = slow.next
     }
-    return p2
+    return slow
   }
 
   const p = findFromEnd(dummy, n + 1)
