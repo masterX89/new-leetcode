@@ -6,24 +6,28 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-function TreeNode(val, left, right) {
-  this.val = val === undefined ? 0 : val
-  this.left = left === undefined ? null : left
-  this.right = right === undefined ? null : right
-}
-
-function dfs(node, res) {
-  if (!node) return
-  dfs(node.left, res)
-  dfs(node.right, res)
-  res.push(node.val)
-}
 /**
  * @param {TreeNode} root
  * @return {number[]}
  */
+
+// 遍历一遍树得到结果
 var postorderTraversal = function (root) {
   let res = []
-  dfs(root, res)
+  const postOrder = (node) => {
+    if (node === null) return
+    postOrder(node.left)
+    postOrder(node.right)
+    res.push(node.val)
+  }
+  postOrder(root)
   return res
+}
+
+// 分解问题
+var postorderTraversal = function (root) {
+  if (root === null) return []
+  const leftRes = postorderTraversal(root.left)
+  const rightRes = postorderTraversal(root.right)
+  return [...leftRes, ...rightRes, root.val]
 }
