@@ -13,7 +13,7 @@
 var reverseKGroup = function (head, k) {
   if (head === null) return null
 
-  // [start, end)
+  // [start, end) 迭代
   const reverse = (start, end) => {
     let prev = null
     let curr = start
@@ -24,6 +24,28 @@ var reverseKGroup = function (head, k) {
       curr = next
     }
     return prev
+  }
+
+  let end = (start = head)
+  for (let i = 0; i < k; i++) {
+    if (end === null) return head
+    end = end.next
+  }
+  let last = reverse(start, end)
+  start.next = reverseKGroup(end, k)
+  return last
+}
+
+var reverseKGroup = function (head, k) {
+  if (head === null) return null
+
+  // [start, end) 递归
+  const reverse = (start, end) => {
+    if (start === end || start.next === end) return start
+    let last = reverse(start.next, end)
+    start.next.next = start
+    start.next = end
+    return last
   }
 
   let end = (start = head)
