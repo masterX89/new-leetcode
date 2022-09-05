@@ -13,8 +13,7 @@
 var removeNthFromEnd = function (head, n) {
   let dummy = new ListNode(-1)
   dummy.next = head
-
-  const findFromEnd = (head, n) => {
+  const findNthFromEnd = (head, n) => {
     let slow = (fast = head)
     for (let i = 0; i < n; i++) {
       fast = fast.next
@@ -25,8 +24,7 @@ var removeNthFromEnd = function (head, n) {
     }
     return slow
   }
-
-  const p = findFromEnd(dummy, n + 1)
+  const p = findNthFromEnd(dummy, n + 1)
   p.next = p.next.next
   return dummy.next
 }
