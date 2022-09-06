@@ -26,3 +26,35 @@ var isPalindrome = function (head) {
   }
   return true
 }
+
+// O(n) O(1)
+var isPalindrome = function (head) {
+  const reverse = (head) => {
+    let prev = null
+    let curr = head
+    while (curr) {
+      const next = curr.next
+      curr.next = prev
+      prev = curr
+      curr = next
+    }
+    return prev
+  }
+
+  let slow = (fast = head)
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next
+    slow = slow.next
+  }
+  if (fast !== null) slow = slow.next
+  let p = (left = head)
+  let q = (right = reverse(slow))
+  while (right !== null) {
+    if (left.val !== right.val) return false
+    p = left
+    left = left.next
+    right = right.next
+  }
+  p.next = reverse(q)
+  return true
+}
