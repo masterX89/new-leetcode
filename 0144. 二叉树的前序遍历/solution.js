@@ -10,6 +10,30 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+
+// 递归 一次遍历
+var preorderTraversal = function (root) {
+  let res = []
+  const traversal = (node) => {
+    if (node === null) return
+    res.push(node.val)
+    traversal(node.left)
+    traversal(node.right)
+  }
+  traversal(root)
+  return res
+}
+
+// 递归 分解问题
+var preorderTraversal = function (root) {
+  if (root === null) return []
+  const leftList = preorderTraversal(root.left)
+  const rightList = preorderTraversal(root.right)
+  const res = [root.val, ...leftList, ...rightList]
+  return res
+}
+
+// TODO: 迭代 外部栈
 var preorderTraversal = function (root) {
   if (!root) return []
   let res = []
