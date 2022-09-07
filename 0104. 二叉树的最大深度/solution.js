@@ -13,16 +13,14 @@
 
 // 递归 一次遍历
 var maxDepth = function (root) {
-  let res = (depth = 0)
-  const traverse = (node) => {
+  let res = 0
+  const traverse = (node, depth) => {
     if (node === null) return
-    depth++
     if (node.left === null && node.right === null) res = Math.max(res, depth)
-    traverse(node.left)
-    traverse(node.right)
-    depth--
+    traverse(node.left, depth + 1)
+    traverse(node.right, depth + 1)
   }
-  traverse(root)
+  traverse(root, 1)
   return res
 }
 
