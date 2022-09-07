@@ -12,6 +12,7 @@
  * @param {Node} root
  * @return {Node}
  */
+// 递归 逻辑三叉树
 var connect = function (root) {
   const traversal = (node1, node2) => {
     if (node1 === null || node2 === null) return
@@ -41,5 +42,17 @@ var connect = function (root) {
     }
     p.next = null
   }
+  return root
+}
+
+// 递归 问题分解
+var connect = function (root) {
+  if (root === null) return null
+  if (root.left !== null) {
+    root.left.next = root.right
+    root.right.next = root.next === null ? null : root.next.left
+  }
+  connect(root.left)
+  connect(root.right)
   return root
 }
