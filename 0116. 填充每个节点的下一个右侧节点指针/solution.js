@@ -24,3 +24,22 @@ var connect = function (root) {
   traversal(root.left, root.right)
   return root
 }
+
+// 迭代 层次
+var connect = function (root) {
+  if (root === null) return null
+  let q = [root]
+  while (q.length !== 0) {
+    const len = q.length
+    let p = q[0]
+    for (let i = 0; i < len; i++) {
+      const node = q.shift()
+      node.left && q.push(node.left)
+      node.right && q.push(node.right)
+      p.next = node
+      p = p.next
+    }
+    p.next = null
+  }
+  return root
+}
