@@ -12,11 +12,11 @@
  */
 // 分解问题
 var constructMaximumBinaryTree = function (nums) {
-  // [left,right)
-  const create = (nums, left, right) => {
+  //  [left,right)
+  const build = (nums, left, right) => {
     if (left === right) return null
-    let max = -Infinity
     let index = left
+    let max = -1
     for (let i = left; i < right; i++) {
       if (nums[i] > max) {
         max = nums[i]
@@ -24,10 +24,9 @@ var constructMaximumBinaryTree = function (nums) {
       }
     }
     const root = new TreeNode(max)
-    root.left = create(nums, left, index)
-    root.right = create(nums, index + 1, right)
+    root.left = build(nums, left, index)
+    root.right = build(nums, index + 1, right)
     return root
   }
-  const root = create(nums, 0, nums.length)
-  return root
+  return build(nums, 0, nums.length)
 }
