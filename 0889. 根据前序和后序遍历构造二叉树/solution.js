@@ -12,6 +12,7 @@ function TreeNode(val, left, right) {
   this.left = left === undefined ? null : left
   this.right = right === undefined ? null : right
 }
+// TODO: 优化写法 考虑 preStart + 1 越界问题 和 递归参数问题
 /**
  * @param {number[]} preorder
  * @param {number[]} postorder
