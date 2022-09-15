@@ -19,11 +19,14 @@ var rob = function (root) {
   const dfs = (node) => {
     node.left && dfs(node.left)
     node.right && dfs(node.right)
-    f.set(node, node.val + (g.get(node.left) || 0) + (g.get(node.right) || 0))
+    const fLeftFreq = f.get(node.left) || 0
+    const fRightFreq = f.get(node.right) || 0
+    const gLeftFreq = g.get(node.left) || 0
+    const gRightFreq = g.get(node.right) || 0
+    f.set(node, node.val + gLeftFreq + gRightFreq)
     g.set(
       node,
-      Math.max(f.get(node.left) || 0, g.get(node.left) || 0) +
-        Math.max(f.get(node.right) || 0, g.get(node.right) || 0)
+      Math.max(fLeftFreq, gLeftFreq) + Math.max(fRightFreq, gRightFreq)
     )
   }
   dfs(root)

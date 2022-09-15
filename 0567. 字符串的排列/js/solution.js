@@ -6,7 +6,10 @@
 var checkInclusion = function (s1, s2) {
   let window = new Map()
   let need = new Map()
-  for (const c of s1) need.set(c, (need.get(c) || 0) + 1)
+  for (const c of s1) {
+    const freq = need.get(c) || 0
+    need.set(c, freq + 1)
+  }
   let l = 0
   let r = 0
   let valid = 0
@@ -14,7 +17,8 @@ var checkInclusion = function (s1, s2) {
     const c = s2[r]
     r++
     if (need.has(c)) {
-      window.set(c, (window.get(c) || 0) + 1)
+      const freq = window.get(c) || 0
+      window.set(c, freq + 1)
       if (window.get(c) === need.get(c)) valid++
     }
     while (r - l >= s1.length) {

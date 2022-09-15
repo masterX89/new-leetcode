@@ -10,11 +10,8 @@ var lengthOfLongestSubstring = function (s) {
   while (r < s.length) {
     const c = s[r]
     r++
-    if (window.has(c)) {
-      window.set(c, window.get(c) + 1)
-    } else {
-      window.set(c, 1)
-    }
+    const freq = window.get(c) || 0
+    window.set(c, freq + 1)
     while (window.get(c) > 1) {
       const d = s[l]
       l++

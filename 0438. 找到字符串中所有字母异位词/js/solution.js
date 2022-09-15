@@ -7,7 +7,10 @@ var findAnagrams = function (s, p) {
   let res = []
   const window = new Map()
   const need = new Map()
-  for (const c of p) need.set(c, (need.get(c) || 0) + 1)
+  for (const c of p) {
+    const freq = need.get(c) || 0
+    need.set(c, freq + 1)
+  }
   let l = 0
   let r = 0
   let valid = 0
@@ -15,7 +18,8 @@ var findAnagrams = function (s, p) {
     const c = s[r]
     r++
     if (need.has(c)) {
-      window.set(c, (window.get(c) || 0) + 1)
+      const freq = window.get(c) || 0
+      window.set(c, freq + 1)
       if (window.get(c) === need.get(c)) valid++
     }
     while (r - l >= p.length) {

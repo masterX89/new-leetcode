@@ -6,7 +6,10 @@
 var minWindow = function (s, t) {
   let window = new Map()
   let need = new Map()
-  for (const c of t) need.set(c, (need.get(c) || 0) + 1)
+  for (const c of t) {
+    const freq = need.get(c) || 0
+    need.set(c, freq + 1)
+  }
   let l = 0
   let r = 0
   // 判断 window 是否需要收缩
@@ -19,8 +22,8 @@ var minWindow = function (s, t) {
     r++
     // 窗口内更新
     if (need.has(c)) {
-      // window[c]++
-      window.set(c, (window.get(c) || 0) + 1)
+      const freq = window.get(c) || 0
+      window.set(c, freq + 1)
       if (window.get(c) === need.get(c)) valid++
     }
     // valid 与 need 长度相等尝试 shrink
