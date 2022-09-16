@@ -14,7 +14,7 @@ var findDuplicateSubtrees = function (root) {
   const map = new Map()
   let res = []
   const postTraversal = (root) => {
-    if (root === null) return 'null'
+    if (root === null) return '#'
     const leftSubTree = postTraversal(root.left)
     const rightSubTree = postTraversal(root.right)
     const subTree = `${leftSubTree},${rightSubTree},${root.val}}`
@@ -26,5 +26,23 @@ var findDuplicateSubtrees = function (root) {
     return subTree
   }
   postTraversal(root)
+  return res
+}
+
+// 前序 JSON.stringify 耗时很长
+var findDuplicateSubtrees = function (root) {
+  const map = new Map()
+  let res = []
+  const preTraversal = (root) => {
+    if (root === null) return '#'
+    const subTree = JSON.stringify(root)
+    preTraversal(root.left)
+    preTraversal(root.right)
+    const freq = map.get(subTree) || 0
+    if (freq === 1) res.push(root)
+    map.set(subTree, freq + 1)
+    return subTree
+  }
+  preTraversal(root)
   return res
 }
