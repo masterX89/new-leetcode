@@ -3,7 +3,6 @@
  * @return {number[]}
  */
 // 使用 index 排序保留信息
-// TODO: 循环不变原则的 +j +j - mid - 1 以及大到小排序的写法
 var countSmaller = function (nums) {
   const res = new Array(nums.length).fill(0)
   const indexes = nums.map((_, index) => index)
