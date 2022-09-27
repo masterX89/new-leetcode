@@ -1,40 +1,36 @@
+let res = []
+const mergeSort = (indexes, lo, hi, nums) => {
+  if (lo === hi) return indexes
+  const mid = lo + ((hi - lo) >> 1)
+  mergeSort(indexes, lo, mid, nums)
+  mergeSort(indexes, mid + 1, hi, nums)
+  const sorted = new Array(hi - lo + 1)
+  for (let i = lo, j = mid + 1, k = 0; k < sorted.length; k++) {
+    if (i === mid + 1) {
+      sorted[k] = indexes[j++]
+    } else if (j === hi + 1) {
+      sorted[k] = indexes[i++]
+      res[sorted[k]] += j - (mid + 1)
+    } else if (nums[indexes[i]] > nums[indexes[j]]) {
+      sorted[k] = indexes[j++]
+    } else {
+      sorted[k] = indexes[i++]
+      res[sorted[k]] += j - (mid + 1)
+    }
+  }
+  for (let i = 0; i < sorted.length; i++) {
+    indexes[lo + i] = sorted[i]
+  }
+  return indexes
+}
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
-// 使用 index 排序保留信息
 var countSmaller = function (nums) {
-  const res = new Array(nums.length).fill(0)
+  res = new Array(nums.length).fill(0)
   const indexes = nums.map((_, index) => index)
-  const mergeSort = (indexes) => {
-    // base case
-    if (indexes.length === 1) return indexes
-    const mid = (indexes.length - 1) >> 1
-    const left = mergeSort(indexes.slice(0, mid + 1))
-    const right = mergeSort(indexes.slice(mid + 1))
-    return merge(left, right)
-  }
-  const merge = (left, right) => {
-    let arr = []
-    const len1 = left.length
-    const len2 = right.length
-    const len = len1 + len2
-    for (let i = 0, j = 0, k = 0; k < len; k++) {
-      if (i === len1) {
-        arr[k] = right[j++]
-      } else if (j === len2) {
-        arr[k] = left[i++]
-        res[arr[k]] += j
-      } else if (nums[left[i]] > nums[right[j]]) {
-        arr[k] = right[j++]
-      } else {
-        arr[k] = left[i++]
-        res[arr[k]] += j
-      }
-    }
-    return arr
-  }
-  mergeSort(indexes)
+  mergeSort(indexes, 0, indexes.length - 1, nums)
   return res
 }
 
