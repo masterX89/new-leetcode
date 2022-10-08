@@ -40,11 +40,10 @@ var deserialize = function (data) {
   const rdeserialize = (arr) => {
     if (arr.length === 0) return null
 
-    let root = null
     const val = arr.shift()
     if (val === 'null') return null
 
-    root = new TreeNode(val)
+    let root = new TreeNode(val)
     root.left = rdeserialize(arr)
     root.right = rdeserialize(arr)
     return root
