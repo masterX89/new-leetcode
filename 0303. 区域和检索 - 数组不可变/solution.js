@@ -3,9 +3,9 @@
  */
 var NumArray = function (nums) {
   this.nums = nums
-  this.sumsL = new Array(nums.length + 1).fill(0)
-  for (let i = 0; i < nums.length; i++) {
-    this.sumsL[i + 1] = this.sumsL[i] + nums[i]
+  this.preSum = new Array(nums.length + 1).fill(0)
+  for (let i = 1; i < this.preSum.length; i++) {
+    this.preSum[i] = this.preSum[i - 1] + this.nums[i - 1]
   }
 }
 
@@ -15,7 +15,7 @@ var NumArray = function (nums) {
  * @return {number}
  */
 NumArray.prototype.sumRange = function (left, right) {
-  return this.sumsL[right + 1] - this.sumsL[left]
+  return this.preSum[right + 1] - this.preSum[left]
 }
 
 /**
