@@ -10,3 +10,6 @@
 |  [493. 翻转对](https://leetcode.cn/problems/reverse-pairs/)  |   <font color='red'>hard</font>    |
 | [327. 区间和的个数](https://leetcode.cn/problems/count-of-range-sum/) |   <font color='red'>hard</font>    |
 
+
+
+1. 在后序遍历的时候，如果 root 的结果就是最终结果，那么递归时候的 res 就可以作为最终结果返回。而如果每个 node 都需要参与比较，例如树的最大直径，那么就需要借助外部变量
