@@ -3,40 +3,33 @@
  * @param {string} target
  * @return {number}
  */
-// TODO: 可以优化
 var openLock = function (deadends, target) {
-  const ends = new Set(deadends)
-  const visited = new Set()
-  if (ends.has('0000')) return -1
-  const addOne = (str, j) => {
-    const arr = str.split('').map((val) => parseInt(val))
-    if (arr[j] === 9) arr[j] = 0
-    else arr[j] += 1
-    return arr.join('')
-  }
-  const MinusOne = (str, j) => {
-    const arr = str.split('').map((val) => parseInt(val))
-    if (arr[j] === 0) arr[j] = 9
-    else arr[j] -= 1
-    return arr.join('')
-  }
+  const visited = new Set(deadends)
   let step = 0
-  const q = ['0000']
+  const q = []
+
+  const changePwd = (pwd, pos, offset) => {
+    const arr = pwd.split('').map((val) => parseInt(val))
+    arr[pos] = (arr[pos] + offset + 10) % 10
+    return arr.join('')
+  }
+  const pushQueue = (pwd) => {
+    if (!visited.has(pwd)) {
+      q.push(pwd)
+      visited.add(pwd)
+    }
+  }
+
+  pushQueue('0000')
   while (q.length !== 0) {
     const len = q.length
     for (let i = 0; i < len; i++) {
       const pwd = q.shift()
       if (pwd === target) return step
       for (let j = 0; j < 4; j++) {
-        const pwdAdd = addOne(pwd, j)
-        if (!ends.has(pwdAdd) && !visited.has(pwdAdd)) {
-          q.push(pwdAdd)
-          visited.add(pwdAdd)
-        }
-        const pwdMinus = MinusOne(pwd, j)
-        if (!ends.has(pwdMinus) && !visited.has(pwdMinus)) {
-          q.push(pwdMinus)
-          visited.add(pwdMinus)
+        for (let offset of [-1, 1]) {
+          const newPwd = changePwd(pwd, j, offset)
+          pushQueue(newPwd)
         }
       }
     }
