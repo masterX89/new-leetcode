@@ -11,7 +11,6 @@ var subsetsWithDup = function (nums) {
     for (let i = start; i < nums.length; i++) {
       if (i > start && nums[i] === nums[i - 1]) continue
       track.push(nums[i])
-      // TODO: i + 1 vs. start + 1
       backtrack(track, i + 1)
       track.pop()
     }
