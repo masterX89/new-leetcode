@@ -35,3 +35,14 @@ var maxProfit = function (prices) {
   }
   return dp[prices.length - 1][0]
 }
+
+var maxProfit = function (prices) {
+  // base case
+  let dp_i_0 = 0
+  let dp_i_1 = -Infinity
+  for (let i = 0; i < prices.length; i++) {
+    dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i])
+    dp_i_1 = Math.max(dp_i_1, -prices[i])
+  }
+  return dp_i_0
+}
