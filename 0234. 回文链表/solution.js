@@ -9,22 +9,17 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-// O(n) O(n)
 var isPalindrome = function (head) {
-  let list = []
-  let curr = head
-  while (curr) {
-    list.push(curr.val)
-    curr = curr.next
+  let left = head
+  const helper = (node) => {
+    // base case
+    if (node === null) return true
+    let res = helper(node.next)
+    res &= left.val === node.val
+    left = left.next
+    return res
   }
-  let left = 0
-  let right = list.length - 1
-  while (left < right) {
-    if (list[left] !== list[right]) return false
-    left++
-    right--
-  }
-  return true
+  return helper(head)
 }
 
 // O(n) O(1)
