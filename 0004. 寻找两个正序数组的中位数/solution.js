@@ -13,5 +13,17 @@ var findMedianSortedArrays = function (nums1, nums2) {
   const len = sorted.length
   return len % 2 === 0
     ? (sorted[parseInt(len / 2) - 1] + sorted[parseInt(len / 2)]) / 2
-    : sorted[parseInt(len / 2) - 1]
+    : sorted[parseInt(len / 2)]
+}
+
+var findMedianSortedArrays = function (nums1, nums2) {
+  const len = nums1.length + nums2.length
+  let prev = (curr = null)
+  for (let i = 0, j = 0, k = 0; k <= parseInt(len / 2); k++) {
+    prev = curr
+    if (i === nums1.length) curr = nums2[j++]
+    else if (j === nums2.length) curr = nums1[i++]
+    else curr = nums1[i] < nums2[j] ? nums1[i++] : nums2[j++]
+  }
+  return len % 2 === 0 ? (prev + curr) / 2 : curr
 }
