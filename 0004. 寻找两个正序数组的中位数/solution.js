@@ -27,3 +27,5 @@ var findMedianSortedArrays = function (nums1, nums2) {
   }
   return len % 2 === 0 ? (prev + curr) / 2 : curr
 }
+
+// TODO: O(log) 的解法
