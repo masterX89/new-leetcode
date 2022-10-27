@@ -14,12 +14,12 @@ const mergeSort = (nums, lo, hi) => {
   for (let i = 0; i < sorted.length; i++) {
     nums[lo + i] = sorted[i]
   }
-  return nums
 }
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
 var sortArray = function (nums) {
-  return mergeSort(nums, 0, nums.length - 1)
+  mergeSort(nums, 0, nums.length - 1)
+  return nums
 }
