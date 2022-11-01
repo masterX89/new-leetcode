@@ -8,7 +8,7 @@ var nextGreaterElement = function (nums1, nums2) {
   let res = []
   const map = new Map()
   for (let i = nums2.length - 1; i >= 0; i--) {
-    while (st.length !== 0 && nums2[i] > st[st.length - 1]) st.pop()
+    while (st.length !== 0 && nums2[i] >= st[st.length - 1]) st.pop()
     map.set(nums2[i], st.length === 0 ? -1 : st[st.length - 1])
     st.push(nums2[i])
   }
