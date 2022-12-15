@@ -2,17 +2,23 @@
  * @param {number[][]} envelopes
  * @return {number}
  */
-// FIXME: TLE
 var maxEnvelopes = function (envelopes) {
   envelopes.sort((e1, e2) => {
     return e1[0] !== e2[0] ? e1[0] - e2[0] : e2[1] - e1[1]
   })
-  const dp = new Array(envelopes.length).fill(1)
-  for (let i = 0; i < dp.length; i++) {
-    for (let j = 0; j < i; j++) {
-      if (envelopes[j][1] >= envelopes[i][1]) continue
-      dp[i] = Math.max(dp[i], dp[j] + 1)
+  const piles = []
+  for (const envelope of envelopes) {
+    const target = envelope[1]
+    let l = 0
+    let r = piles.length - 1
+    while (l <= r) {
+      const c = l + ((r - l) >> 1)
+      const card = piles[c][piles[c].length - 1]
+      if (card >= target) r = c - 1
+      else l = c + 1
     }
+    if (l === piles.length) piles.push([target])
+    else piles[l].push(target)
   }
-  return Math.max(...dp)
+  return piles.length
 }
