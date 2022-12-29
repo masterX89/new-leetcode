@@ -27,7 +27,7 @@ var coinChange = function (coins, amount) {
 var coinChange = function (coins, amount) {
   const dp = new Array(amount + 1).fill(Infinity)
   dp[0] = 0
-  for (let i = 1; i < dp.length; i++) {
+  for (let i = 1; i <= amount; i++) {
     for (const coin of coins) {
       if (coin > i) {
         continue
