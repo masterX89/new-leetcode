@@ -12,16 +12,17 @@
  */
 var binaryTreePaths = function (root) {
   let res = []
-  const preOrder = (node, path) => {
+  const backtrack = (node, path) => {
+    // 注意 return 的条件和 res 添加的条件是不一样的
     if (node === null) return
     path.push(node.val)
     if (node.left === null && node.right === null) {
       res.push(path.join('->'))
     }
-    preOrder(node.left, path)
-    preOrder(node.right, path)
+    backtrack(node.left, path)
+    backtrack(node.right, path)
     path.pop()
   }
-  preOrder(root, [])
+  backtrack(root, [])
   return res
 }
