@@ -23,16 +23,18 @@ var coinChange = function (coins, amount) {
   return helper(coins, amount)
 }
 
-// iterate
+// dp[i] 凑成 i 所需要的最小个数
 var coinChange = function (coins, amount) {
-  const dp = new Array(amount + 1).fill(amount + 1)
-  // base case
+  const dp = new Array(amount + 1).fill(Infinity)
   dp[0] = 0
-  for (let i = 0; i < dp.length; i++) {
+  for (let i = 1; i < dp.length; i++) {
     for (const coin of coins) {
-      if (i - coin < 0) continue
-      dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+      if (coin > i) {
+        continue
+      } else {
+        dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+      }
     }
   }
-  return dp[amount] === amount + 1 ? -1 : dp[amount]
+  return dp[amount] === Infinity ? -1 : dp[amount]
 }
