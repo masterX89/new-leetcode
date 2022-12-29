@@ -10,12 +10,8 @@ var findTargetSumWays = function (nums, target) {
       if (sum === target) res++
       return
     }
-    sum += nums[i]
-    backtrack(i + 1, sum)
-    sum -= nums[i]
-    sum -= nums[i]
-    backtrack(i + 1, sum)
-    sum += nums[i]
+    backtrack(i + 1, sum + nums[i])
+    backtrack(i + 1, sum - nums[i])
   }
   backtrack(0, 0)
   return res
