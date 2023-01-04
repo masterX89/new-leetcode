@@ -11,9 +11,7 @@
 var findCheapestPrice = function (n, flights, src, dst, k) {
   const dp = new Array(k + 2).fill(0).map(() => new Array(n).fill(Infinity))
   // base case
-  for (let i = 0; i <= k + 1; i++) {
-    dp[i][src] = 0
-  }
+  for (let i = 0; i <= k + 1; i++) dp[i][src] = 0
   for (let i = 1; i <= k + 1; i++) {
     for (const flight of flights) {
       const [from, to, price] = flight
