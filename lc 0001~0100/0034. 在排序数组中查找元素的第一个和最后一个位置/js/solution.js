@@ -8,24 +8,22 @@
 // nums = [], target = 0 [-1,-1]
 var searchRange = function (nums, target) {
   let res = []
-  let [l, r] = [0, nums.length - 1]
-  // >=
+  const n = nums.length
+  let [l, r] = [0, n - 1]
   while (l <= r) {
-    let mid = l + ((r - l) >> 1)
-    if (nums[mid] < target) l = mid + 1
-    else r = mid - 1
+    let c = l + ((r - l) >> 1)
+    if (nums[c] >= target) r = c - 1
+    else l = c + 1
   }
-  // l
-  res.push(l !== nums.length && nums[l] === target ? l : -1)
-  if (res[0] === -1) return [-1, -1]
-  ;[l, r] = [0, nums.length - 1]
-  // <=
+  // r l
+  if (l === n || nums[l] !== target) return [-1, -1]
+  res.push(l)
+  ;[l, r] = [0, n - 1]
   while (l <= r) {
-    let mid = l + ((r - l) >> 1)
-    if (nums[mid] <= target) l = mid + 1
-    else r = mid - 1
+    let c = l + ((r - l) >> 1)
+    if (nums[c] <= target) l = c + 1
+    else r = c - 1
   }
-  // r
-  res.push(r !== -1 && nums[r] === target ? r : -1)
+  res.push(r)
   return res
 }
