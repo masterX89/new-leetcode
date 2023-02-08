@@ -4,19 +4,19 @@
  */
 var numTrees = function (n) {
   let memo = new Array(n + 1).fill(0).map(() => new Array(n + 1).fill(0))
-  const count = (lo, hi) => {
-    if (lo > hi) return 1
-    if (memo[lo][hi] !== 0) return memo[lo][hi]
-    let res = 0
-    for (let i = lo; i <= hi; i++) {
-      const left = count(lo, i - 1)
-      const right = count(i + 1, hi)
-      res += left * right
+  const helper = (start, end) => {
+    if (start > end) return 1
+    if (memo[start][end] !== 0) return memo[start][end]
+    let count = 0
+    for (let i = start; i <= end; i++) {
+      const left = helper(start, i - 1)
+      const right = helper(i + 1, end)
+      count += left * right
     }
-    memo[lo][hi] = res
-    return res
+    memo[start][end] = count
+    return count
   }
-  return count(1, n)
+  return helper(1, n)
 }
 
 // 数学
