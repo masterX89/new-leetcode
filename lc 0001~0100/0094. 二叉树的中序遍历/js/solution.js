@@ -6,25 +6,39 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-
-// 颜色标记法迭代
-// 利用 TreeNode 和 val 的类型不同
 /**
  * @param {TreeNode} root
  * @return {number[]}
  */
 var inorderTraversal = function (root) {
   let res = []
-  if (!root) return res
-  let st = [root]
-  while (st.length) {
-    let node = st.pop()
-    if (node instanceof TreeNode) {
-      node.right && st.push(node.right)
-      st.push(node.val)
-      node.left && st.push(node.left)
+  const recur = (node) => {
+    if (node === null) return
+    recur(node.left)
+    res.push(node.val)
+    recur(node.right)
+  }
+  recur(root)
+  return res
+}
+
+// 染色迭代
+var inorderTraversal = function (root) {
+  let res = []
+  let st = []
+  if (root === null) return res
+  st.push(root)
+  while (st.length > 0) {
+    const flag = st.pop()
+    if (flag === null) {
+      const node = st.pop()
+      res.push(node.val)
     } else {
-      res.push(node)
+      const node = flag
+      node.right && st.push(node.right)
+      st.push(node)
+      st.push(null)
+      node.left && st.push(node.left)
     }
   }
   return res
