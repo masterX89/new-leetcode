@@ -11,12 +11,10 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-  const traversal = (node, min, max) => {
+  const helper = (node, min, max) => {
     if (node === null) return true
     if (node.val <= min || node.val >= max) return false
-    const left = traversal(node.left, min, node.val)
-    const right = traversal(node.right, node.val, max)
-    return left && right
+    return helper(node.left, min, node.val) && helper(node.right, node.val, max)
   }
-  return traversal(root, -Infinity, Infinity)
+  return helper(root, -Infinity, Infinity)
 }
