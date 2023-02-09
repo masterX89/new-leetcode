@@ -12,20 +12,23 @@
  */
 var zigzagLevelOrder = function (root) {
   let res = []
-  if (!root) return res
-  let q = [root]
-  let isOrderLeft = true /* left to right*/
-  while (q.length) {
+  let q = []
+  // left to right order
+  let order = true
+  if (root === null) return res
+  q.push(root)
+  while (q.length > 0) {
     const len = q.length
-    res.push([])
+    let list = []
     for (let i = 0; i < len; i++) {
       const node = q.shift()
-      if (isOrderLeft) res[res.length - 1].push(node.val)
-      else res[res.length - 1].unshift(node.val)
+      if (order) list.push(node.val)
+      else list.unshift(node.val)
       node.left && q.push(node.left)
       node.right && q.push(node.right)
     }
-    isOrderLeft = !isOrderLeft
+    res.push(list)
+    order = !order
   }
   return res
 }
