@@ -22,23 +22,12 @@ var movingCount = function (m, n, k) {
     [0, -1],
   ]
   const backtrack = (i, j) => {
+    if (i < 0 || i >= m || j < 0 || j >= n || visited[i][j]) return
+    if (digitSum(i) + digitSum(j) > k) return
+    visited[i][j] = true
     res++
-    for (let [x, y] of directions) {
-      if (
-        i + x >= 0 &&
-        i + x < m &&
-        j + y >= 0 &&
-        j + y < n &&
-        !visited[i + x][j + y] &&
-        digitSum(i + x) + digitSum(j + y) <= k
-      ) {
-        visited[i + x][j + y] = true
-        backtrack(i + x, j + y)
-      }
-    }
+    for (let [x, y] of directions) backtrack(i + x, j + y)
   }
-  if (k === 0) return 1
-  visited[0][0] = true
   backtrack(0, 0)
   return res
 }
