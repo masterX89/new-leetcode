@@ -14,28 +14,22 @@ var exist = function (board, word) {
     [1, 0],
     [0, -1],
   ]
-  const backtrack = (track, i, j) => {
-    if (track === word) res = true
-    if (res || !word.startsWith(track)) return
+  const backtrack = (track, i, j, k) => {
+    if (i < 0 || i >= m || j < 0 || j >= n || visited[i][j]) return
+    if (board[i][j] !== word.charAt(k)) return
+    if (res) return
+    visited[i][j] = true
+    track.push(board[i][j])
+    if (track.join('') === word) res = true
     for (let [x, y] of direction) {
-      if (
-        i + x >= 0 &&
-        i + x < m &&
-        j + y >= 0 &&
-        j + y < n &&
-        !visited[i + x][j + y]
-      ) {
-        visited[i + x][j + y] = true
-        backtrack(track + board[i + x][j + y], i + x, j + y)
-        visited[i + x][j + y] = false
-      }
+      backtrack(track, i + x, j + y, k + 1)
     }
+    track.pop()
+    visited[i][j] = false
   }
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      visited[i][j] = true
-      backtrack(board[i][j], i, j)
-      visited[i][j] = false
+      backtrack([], i, j, 0)
     }
   }
   return res
