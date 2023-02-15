@@ -13,15 +13,18 @@
  */
 var pathSum = function (root, target) {
   let res = []
-  function recur(node, path, target) {
-    if (!node) return
-    path.push(node.val)
-    if (node.left === null && node.right === null && node.val === target)
-      res.push(path.slice())
-    node.left && recur(node.left, path, target - node.val)
-    node.right && recur(node.right, path, target - node.val)
-    path.pop()
+  const backtrack = (node, track, sum) => {
+    if (node === null) return
+    track.push(node.val)
+    sum += node.val
+    if (node.left === null && node.right === null && sum === target) {
+      res.push(track.slice())
+    }
+    backtrack(node.left, track, sum)
+    backtrack(node.right, track, sum)
+    track.pop()
+    sum -= node.val
   }
-  recur(root, [], target)
+  backtrack(root, [], 0)
   return res
 }
