@@ -10,15 +10,16 @@
  * @param {number} k
  * @return {number}
  */
-// res 和 k 都是闭包的
 var kthLargest = function (root, k) {
-  let res
-  function inOrderTraversal(node) {
-    if (k === 0) return
-    node.right && inOrderTraversal(node.right)
-    if (--k === 0) res = node.val
-    node.left && inOrderTraversal(node.left)
+  let res = -1
+  const inOrder = (node) => {
+    if (node === null) return
+    if (k < 0) return
+    inOrder(node.right)
+    k--
+    if (k === 0) res = node.val
+    inOrder(node.left)
   }
-  inOrderTraversal(root)
+  inOrder(root)
   return res
 }
