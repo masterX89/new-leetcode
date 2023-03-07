@@ -17,26 +17,22 @@ var copyRandomList = function (head) {
   // 1 -> 1' -> 2 -> 2' -> 3 -> 3'
   let p = head
   while (p) {
-    let copyNode = new Node(p.val, p.next, null)
-    p.next = copyNode
-    p = copyNode.next
-  }
-  // copy random
-  p = head
-  while (p) {
-    if (p.random !== null) {
-      p.next.random = p.random.next
-    }
+    const copy = new Node(p.val, p.next, null)
+    p.next = copy
     p = p.next.next
   }
-  // 链表分离
   p = head
+  while (p) {
+    if (p.random) p.next.random = p.random.next
+    p = p.next.next
+  }
   let cur = dummy
+  p = head
   while (p) {
     cur.next = p.next
-    p.next = cur.next.next
-    cur = cur.next
+    p.next = p.next.next
     p = p.next
+    cur = cur.next
   }
   return dummy.next
 }
